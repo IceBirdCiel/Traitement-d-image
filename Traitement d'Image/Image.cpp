@@ -9,16 +9,16 @@
 
 Image::Image(const char* filename) {
 	if(read(filename)){
-		std::cout << "file readed : " << filename;
-		size = width * height * channels;
+		std::cout << "file readed : " << filename << std::endl;
+		size = width*height*channels;
 	}
 	else {
-		std::cout << " failed to read image : " << filename;
+		std::cout << " failed to read image : " << filename << std::endl;
 	}
 }
 
 Image::Image(int width, int height, int channels) : width(width), height(height), channels(channels) {
-	size = width * height * channels;
+	size = width*height*channels;
 	data = new uint8_t[size];
 }
 
@@ -36,7 +36,8 @@ bool Image::read(const char* filename) {
 }
 
 bool Image::write(const char* filename) {
-	ImageType type = getFileType(filename);
+	ImageType type;
+	type = getFileType(filename);
 	int succes;
 	if (type == PNG) {
 		succes = stbi_write_png(filename, width, height, channels, data, width*channels);
@@ -51,7 +52,7 @@ bool Image::write(const char* filename) {
 		succes = stbi_write_tga(filename, width, height, channels, data);
 	}
 
-	return succes != 0;
+	return (succes != 0);
 }
 
 ImageType Image::getFileType(const char* filename) {
@@ -83,4 +84,14 @@ int Image::getHeight() {
 
 int Image::getChannels() {
 	return channels;
+}
+
+Color Image::getColor(int x, int y)
+{
+	Color c;
+	c.r = data[(x*3*width)+(y*3)];
+	c.g = data[(x * 3 * width) + (y * 3 + 1)];
+	c.b = data[(x * 3 * width) + (y * 3 + 2)];
+
+	return c;
 }

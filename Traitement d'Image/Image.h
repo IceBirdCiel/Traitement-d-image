@@ -1,3 +1,5 @@
+#ifndef _IMAGE_HPP_
+#define _IMAGE_HPP_
 #include <cstdint>
 #include <cstdio>
 #include "stb_image.h"
@@ -6,6 +8,10 @@
 
 enum ImageType {
 	PNG, JPG, BMP, TGA
+};
+
+struct Color {
+	int r, g, b;
 };
 
 class Image {
@@ -29,4 +35,8 @@ public:
 	int getWidth();
 	int getHeight();
 	int getChannels();
+
+	Color getColor(int x, int y);
 };
+
+#endif
