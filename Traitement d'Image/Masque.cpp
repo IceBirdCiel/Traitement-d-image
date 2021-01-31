@@ -1,6 +1,8 @@
 #include "Masque.h"
 
 void Masque::maskDetection(Image bg, Image img, Image* mask) {
+	int seuil = 20;
+
 	for (int x = 0; x < img.getHeight(); x++) {
 		for (int y = 0; y < img.getWidth(); y++) {
 			int r1, g1, b1;
@@ -15,7 +17,7 @@ void Masque::maskDetection(Image bg, Image img, Image* mask) {
 
 			Color c;
 
-			if (r1 == r2 && g1 == g2 && b1 && b2) {
+			if (abs(r1-r2) < seuil && abs(g1-g2) < seuil && abs(b1-b2) < seuil) {
 				c.r = 0;
 				c.g = 255;
 				c.b = 0;
