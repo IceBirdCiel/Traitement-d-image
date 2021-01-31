@@ -1,5 +1,6 @@
 #include "Image.h"
 #include "Background.h"
+#include "Masque.h"
 #include <iostream>
 #include <vector>
 
@@ -23,6 +24,12 @@ int main(int argc, char** argv) {
 	bg.median(images, &background);
 	
 	background.write("background.jpg");
+
+	Image mask(scene1.getWidth(), scene1.getHeight(), scene1.getChannels());
+	Masque msk;
+	msk.maskDetection(background, scene0, &mask);
+
+	mask.write("mask0.jpg");
 
 	return 0;
 }

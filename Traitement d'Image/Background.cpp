@@ -42,24 +42,3 @@ void Background::median(std::vector<Image> images, Image* bg)
         }
     }
 }
-
-//void Background::commonBG(std::vector<Image> images, Image bg)
-//{
-//
-//
-//    for (int x = 0; x < bg.getWidth(); x++) {
-//        for (int y = 0; y < bg.getHeight(); y++) {
-//            for (int chan = 0; chan < bg.getChannels(); chan++) {
-//                if (chan == 0) {
-//                    bg.data[x * y * chan] = medianPixel(images, x, y).r;
-//                }
-//                if (chan == 1) {
-//                    bg.data[x * y * chan] = medianPixel(images, x, y).b;
-//                }
-//                if (chan == 2) {
-//                    bg.data[x * y * chan] = medianPixel(images, x, y).g;
-//                }
-//            }
-//        }
-//    }
-//}
