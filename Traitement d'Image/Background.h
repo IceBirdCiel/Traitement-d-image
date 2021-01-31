@@ -8,8 +8,9 @@ private:
 	std::vector<Image> images;
 
 public:
-	Color majorPixel(std::vector<Image> images, int x, int y);
-	void commonBG(std::vector<Image> images, Image bg);
+	void sort(int* tab);
+	void median(std::vector<Image> images, Image bg);
+	//void commonBG(std::vector<Image> images, Image bg);
 };
 
 #endif

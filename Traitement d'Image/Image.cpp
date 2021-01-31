@@ -70,28 +70,37 @@ ImageType Image::getFileType(const char* filename) {
 		else if (strcmp(extension, ".TGA") == 0) {
 			return TGA;
 		}
+		else {
+			return PNG;
+		}
 	}
-	return PNG;
+	
 }
 
-int Image::getWidth(){
+int Image::getWidth()const{
 	return width;
 }
 
-int Image::getHeight() {
+int Image::getHeight()const{
 	return height;
 }
 
-int Image::getChannels() {
+int Image::getChannels()const{
 	return channels;
 }
 
-Color Image::getColor(int x, int y)
+Color Image::getColor(int x, int y)const
 {
 	Color c;
-	c.r = data[(x*3*width)+(y*3)];
-	c.g = data[(x * 3 * width) + (y * 3 + 1)];
-	c.b = data[(x * 3 * width) + (y * 3 + 2)];
+	c.r = data[(x * 3 * width) + (y * 3)];
+	c.g = data[(x * 3 * width) + (y * 3) + 1];
+	c.b = data[(x * 3 * width) + (y * 3) + 2];
 
 	return c;
+}
+
+void Image::setColor(int x, int y, Color c) {
+	data[(x * 3 * width) + (y * 3)] = c.r;
+	data[(x * 3 * width) + (y * 3) + 1] = c.g;
+	data[(x * 3 * width) + (y * 3) + 2] = c.b;
 }

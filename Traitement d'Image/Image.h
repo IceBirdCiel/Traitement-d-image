@@ -32,11 +32,12 @@ public:
 
 	ImageType getFileType(const char* filename);
 
-	int getWidth();
-	int getHeight();
-	int getChannels();
+	int getWidth()const;
+	int getHeight()const;
+	int getChannels()const;
 
-	Color getColor(int x, int y);
+	Color getColor(int x, int y)const;
+	void setColor(int x, int y, Color c);
 };
 
 #endif
