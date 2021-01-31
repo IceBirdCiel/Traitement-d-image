@@ -1,3 +1,4 @@
+#include <vector>
 #include "Masque.h"
 
 void Masque::maskDetection(Image bg, Image img, Image* mask) {
@@ -24,9 +25,9 @@ void Masque::maskDetection(Image bg, Image img, Image* mask) {
 				mask->setColor(x, y, c);
 			}
 			else {
-				c.r = r2;
-				c.g = g2;
-				c.b = b2;
+				c.r = 255;
+				c.g = 255;
+				c.b = 255;
 				mask->setColor(x, y, c);
 			}
 		}
@@ -35,4 +36,46 @@ void Masque::maskDetection(Image bg, Image img, Image* mask) {
 
 void Masque::mask_cc(Image* mask) {
 
+}
+
+int Masque::cc_size(Image mask, int x, int y) {
+	std::vector<Position> pos;
+
+	int size = 0;
+
+	Position p;
+	p.x = x;
+	p.y = y;
+
+	Color black;
+	black.r = 0;
+	black.g = 0;
+	black.b = 0;
+
+	if (mask.getColor(x, y).g == 255) {
+		size += 1;
+		mask.setColor(x, y, black);
+		pos.push_back(p);
+	}
+
+	while (!pos.empty()) {
+		Position a;
+		a = pos.back();
+		for (int i = x - 1; i < x + 2; i++) {
+			for (int j = y - 1; j < j + 2; j++) {
+				if (i < mask.getHeight() && i >= 0 && j < mask.getWidth() && j >= 0) {
+					if (mask.getColor(i, j).r == 255 && mask.getColor(i, j).g == 255 && mask.getColor(i, j).b == 255) {
+						size += 1;
+						mask.setColor(i, j, black);
+						Position tmp;
+						tmp.x = i;
+						tmp.y = j;
+						pos.push_back(tmp);
+					}
+				}
+			}
+		}
+	}
+
+	return size;
 }
