@@ -9,7 +9,7 @@ private:
 
 public:
 	void sort(int* tab);
-	void median(std::vector<Image> images, Image bg);
+	void median(std::vector<Image> images, Image* bg);
 	//void commonBG(std::vector<Image> images, Image bg);
 };
 

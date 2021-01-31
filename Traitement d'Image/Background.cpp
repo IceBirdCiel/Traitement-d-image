@@ -15,7 +15,7 @@ void Background::sort(int* tab)
     }
 }
 
-void Background::median(std::vector<Image> images, Image bg)
+void Background::median(std::vector<Image> images, Image* bg)
 {
     int size = images.size();
 
@@ -23,8 +23,8 @@ void Background::median(std::vector<Image> images, Image bg)
     int* g = new int[size];
     int* b = new int[size];
 
-    for (int x = 0; x < images.at(0).getWidth(); x++) {
-        for (int y = 0; y < images.at(0).getHeight(); y++) {
+    for (int x = 0; x < images.at(0).getHeight(); x++) {
+        for (int y = 0; y < images.at(0).getWidth(); y++) {
             for (int i = 0; i < size; i++) {
                 r[i] = images.at(i).getColor(x, y).r;
                 g[i] = images.at(i).getColor(x, y).g;
@@ -38,7 +38,7 @@ void Background::median(std::vector<Image> images, Image bg)
             c.r = r[int(size / 2)];
             c.g = g[int(size / 2)];
             c.b = b[int(size / 2)];
-            bg.setColor(x, y, c);
+            bg->setColor(x, y, c);
         }
     }
 }

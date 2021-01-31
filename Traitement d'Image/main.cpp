@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 	Image scene2("scene2.jpeg");
 	Image scene3("scene3.jpeg");
 	Image scene4("scene4.jpeg");
-
+	
 	std::vector<Image> images;
 	images.push_back(scene0);
 	images.push_back(scene1);
@@ -20,7 +20,8 @@ int main(int argc, char** argv) {
 
 	Image background(scene1.getWidth(), scene1.getHeight(), scene1.getChannels());
 	Background bg;
-	bg.median(images, background);
+	bg.median(images, &background);
+	
 	background.write("background.jpg");
 
 	return 0;
