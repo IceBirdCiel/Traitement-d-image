@@ -25,9 +25,9 @@ void Masque::maskDetection(Image bg, Image img, Image* mask) {
 				mask->setColor(x, y, c);
 			}
 			else {
-				c.r = 255;
-				c.g = 255;
-				c.b = 255;
+				c.r = r2;
+				c.g = g2;
+				c.b = b2;
 				mask->setColor(x, y, c);
 			}
 		}

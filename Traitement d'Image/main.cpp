@@ -1,8 +1,10 @@
 #include "Image.h"
 #include "Background.h"
 #include "Masque.h"
+#include "Compose.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
 int main(int argc, char** argv) {
 
@@ -25,11 +27,24 @@ int main(int argc, char** argv) {
 	
 	background.write("background.jpg");
 
-	Image mask(scene1.getWidth(), scene1.getHeight(), scene1.getChannels());
-	Masque msk;
-	msk.maskDetection(background, scene0, &mask);
+	std::vector<Image> masks;
+	for (int i = 0; i < 5; i++) {
+		Image mask(images.at(i).getWidth(), images.at(i).getHeight(), images.at(i).getChannels());
+		Masque msk;
+		msk.maskDetection(background, images.at(i), &mask);
 
-	mask.write("mask0.jpg");
+		std::string s = std::to_string(i);
+		std::string name = "scene";
+		name += s;
+		name += ".jpg";
+		mask.write(name.c_str());
+		masks.push_back(mask);
+	}
 
+	Image final(scene1.getWidth(), scene1.getHeight(), scene1.getChannels());
+	Compose cp;
+	cp.Composition(background, masks, &final);
+	final.write("final.jpg");
+	
 	return 0;
 }
